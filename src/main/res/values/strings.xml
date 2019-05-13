@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">module_picture</string>
+
+    <string name="behavior_main_header">chen.module_picture.behavior.MainHeaderBehavior</string>
+    <string name="behavior_main_title">chen.module_picture.behavior.MainTitleBehavior</string>
+    <string name="behavior_main_tab">chen.module_picture.behavior.MainTabBehavior</string>
+    <string name="behavior_main_content">chen.module_picture.behavior.MainContentBehavior</string>
+
 </resources>
