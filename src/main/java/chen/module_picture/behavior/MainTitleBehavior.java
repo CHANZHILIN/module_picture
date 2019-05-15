@@ -41,7 +41,7 @@ public class MainTitleBehavior extends CoordinatorLayout.Behavior<View> {
     }
 
     private int getTitleHeight() {
-        return mContext.getResources().getDimensionPixelOffset(R.dimen.title_height);
+        return mContext.getResources().getDimensionPixelOffset(R.dimen.total_title_height);
     }
 
     private boolean isDependOn(View dependency) {

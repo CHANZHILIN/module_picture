@@ -2,8 +2,8 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:fitsSystemWindows="true"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
 
     <FrameLayout
@@ -34,27 +34,12 @@
         </chen.module_picture.helper.NestedLinearLayout>
     </FrameLayout>
 
-    <LinearLayout
+    <include
+        layout="@layout/title_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/title_height"
+        android:layout_height="@dimen/total_title_height"
         android:orientation="vertical"
-        app:layout_behavior="@string/behavior_main_title">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="?attr/colorPrimary" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="?attr/colorPrimary"
-            android:gravity="center"
-            android:text="Hello World"
-            android:textColor="?attr/textColor"
-            android:textSize="18sp" />
-    </LinearLayout>
+        app:layout_behavior="@string/behavior_main_title" />
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tablayout"
@@ -70,8 +55,8 @@
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
         android:background="@color/white"
+        android:fitsSystemWindows="true"
         app:layout_behavior="@string/behavior_main_content" />
 
 </android.support.design.widget.CoordinatorLayout>

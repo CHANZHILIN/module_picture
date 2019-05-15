@@ -74,7 +74,7 @@ public class MainContentBehavior extends HeaderScrollingViewBehavior {
 
     private int getFinalHeight() {
         return mContext.getResources().getDimensionPixelOffset(R.dimen.tab_height)
-                + mContext.getResources().getDimensionPixelOffset(R.dimen.title_height);
+                + mContext.getResources().getDimensionPixelOffset(R.dimen.total_title_height);
     }
 
 
