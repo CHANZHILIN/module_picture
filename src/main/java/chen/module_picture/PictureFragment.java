@@ -4,16 +4,20 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import chen.baselib.base.EmptyPresenterImpl;
+import chen.baselib.base.EmptyView;
+import chen.baselib.base.MVPFragment;
+import chen.baselib.utils.ToastUtil;
 import chen.module_picture.banner.IndicatorLocation;
 import chen.module_picture.banner.LoopLayout;
 import chen.module_picture.banner.LoopStyle;
@@ -24,20 +28,32 @@ import chen.module_picture.banner.view.BannerBgContainer;
 import chen.module_picture.behavior.MainHeaderBehavior;
 
 
-public class PictureFragment extends Fragment implements MainHeaderBehavior.OnHeaderStateListener, OnBannerItemClickListener {
+public class PictureFragment extends MVPFragment<EmptyPresenterImpl> implements EmptyView, MainHeaderBehavior.OnHeaderStateListener, OnBannerItemClickListener {
     private static final String ARG_PARAM1 = "param1";
+    @BindView(R2.id.banner_bg_container)
+    BannerBgContainer bannerBgContainer;
+    @BindView(R2.id.loop_layout)
+    LoopLayout loopLayout;
+    @BindView(R2.id.header)
+    FrameLayout header;
+    @BindView(R2.id.iv_back)
+    ImageView ivBack;
+    @BindView(R2.id.title)
+    TextView title;
+    @BindView(R2.id.right_title)
+    TextView rightTitle;
+    @BindView(R2.id.tablayout)
+    TabLayout tablayout;
+    @BindView(R2.id.viewpager)
+    ViewPager viewpager;
 
     private String mParam1;
-    BannerBgContainer bannerBgContainer;
-    LoopLayout loopLayout;
+//    BannerBgContainer bannerBgContainer;
+//    LoopLayout loopLayout;
 
-    private ViewPager mViewPager;
+//    private ViewPager mViewPager;
 
     private MainHeaderBehavior mHeaderBehavior;
-
-//    private RecyclerView mRecyclerView;
-
-//    private TextView mTextView;
 
 
     public static PictureFragment newInstance(String param1) {
@@ -49,14 +65,11 @@ public class PictureFragment extends Fragment implements MainHeaderBehavior.OnHe
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-        }
+    protected EmptyPresenterImpl createPresent() {
+        return new EmptyPresenterImpl(this);
     }
 
-    @Override
+/*    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -74,6 +87,21 @@ public class PictureFragment extends Fragment implements MainHeaderBehavior.OnHe
 //        mRecyclerView.setAdapter(new GeneralAdapter(getContext(), datas));
 //        mTextView = view.findViewById(R.id.textView);
 //        mTextView.setText(mParam1 + "_fragment");
+
+        return view;
+    }*/
+
+    @Override
+    public int getResId() {
+        return R.layout.fragment_picture;
+    }
+
+    @Override
+    protected void init() {
+
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+        }
         ArrayList<Fragment> fragments = new ArrayList<>();
         ArrayList<String> titles = new ArrayList<>();
 
@@ -85,19 +113,19 @@ public class PictureFragment extends Fragment implements MainHeaderBehavior.OnHe
         titles.add("GIF动图");
         titles.add("全景图");
 
-        mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
-        TabLayout tableLayout = (TabLayout) view.findViewById(R.id.tablayout);
+//        mViewPager = (ViewPager) view.findViewById(R.id.viewpager);
+//        TabLayout tableLayout = (TabLayout) view.findViewById(R.id.tablayout);
 
-        TypePageAdapter mTypeAdapter = new TypePageAdapter(getFragmentManager());
+        TypePageAdapter mTypeAdapter = new TypePageAdapter(getChildFragmentManager());
         mTypeAdapter.setData(fragments, titles);
-        mViewPager.setAdapter(mTypeAdapter);
-        mViewPager.setOffscreenPageLimit(titles.size() - 1);
+        viewpager.setAdapter(mTypeAdapter);
+        viewpager.setOffscreenPageLimit(titles.size() - 1);
 
-        tableLayout.setupWithViewPager(mViewPager);
-        tableLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tablayout.setupWithViewPager(viewpager);
+        tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                mViewPager.setCurrentItem(tab.getPosition());
+                viewpager.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -110,7 +138,12 @@ public class PictureFragment extends Fragment implements MainHeaderBehavior.OnHe
 
             }
         });
-        return view;
+        initData();
+    }
+
+    @Override
+    protected void initListener() {
+
     }
 
     private void initData() {
@@ -162,6 +195,7 @@ public class PictureFragment extends Fragment implements MainHeaderBehavior.OnHe
 
     @Override
     public void onBannerClick(int index, ArrayList<BannerInfo> banner) {
-
+        ToastUtil.show("点击了banner");
     }
+
 }

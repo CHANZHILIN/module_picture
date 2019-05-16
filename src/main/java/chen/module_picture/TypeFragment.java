@@ -49,7 +49,7 @@ public class TypeFragment extends Fragment {
         for (int i = 0; i < 20; i++) {
             list.add(i + 1 + "");
         }
-        GeneralAdapter adapter = new GeneralAdapter(mContext,list);
+        GeneralAdapter adapter = new GeneralAdapter(mContext, list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
